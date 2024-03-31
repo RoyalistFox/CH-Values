@@ -100,18 +100,18 @@ stats"
 
   <!-- JavaScript for the test itself -->
   <script>
-    var max_econ, max_dipl, max_govt, max_scty; // Max possible scores
-    max_econ = max_dipl = max_govt = max_scty = 0;
-    var econ, dipl, govt, scty; // User's scores
-    econ = dipl = govt = scty = 0;
+    var max_style, max_strat, max_atd, max_crea; // Max possible scores
+    max_style = max_strat = max_atd = max_crea = 0;
+    var style, strat, atd, crea; // User's scores
+    style = strat = atd = crea = 0;
     var qn = 0; // Question number
     var prev_answer = null;
     init_question();
     for (var i = 0; i < questions.length; i++) {
-      max_econ += Math.abs(questions[i].effect.econ);
-      max_dipl += Math.abs(questions[i].effect.dipl);
-      max_govt += Math.abs(questions[i].effect.govt);
-      max_scty += Math.abs(questions[i].effect.scty);
+      max_style += Math.abs(questions[i].effect.style);
+      max_strat += Math.abs(questions[i].effect.strat);
+      max_atd += Math.abs(questions[i].effect.atd);
+      max_crea += Math.abs(questions[i].effect.crea);
     }
     function init_question() {
       document.getElementById("question-text").innerHTML =
@@ -128,10 +128,10 @@ stats"
     }
 
     function next_question(mult) {
-      econ += mult * questions[qn].effect.econ;
-      dipl += mult * questions[qn].effect.dipl;
-      govt += mult * questions[qn].effect.govt;
-      scty += mult * questions[qn].effect.scty;
+      style += mult * questions[qn].effect.style;
+      strat += mult * questions[qn].effect.strat;
+      atd += mult * questions[qn].effect.atd;
+      crea += mult * questions[qn].effect.crea;
       qn++;
       prev_answer = mult;
       if (qn < questions.length) {
@@ -145,10 +145,10 @@ stats"
         return;
       }
       qn--;
-      econ -= prev_answer * questions[qn].effect.econ;
-      dipl -= prev_answer * questions[qn].effect.dipl;
-      govt -= prev_answer * questions[qn].effect.govt;
-      scty -= prev_answer * questions[qn].effect.scty;
+      style -= prev_answer * questions[qn].effect.style;
+      strat -= prev_answer * questions[qn].effect.strat;
+      atd -= prev_answer * questions[qn].effect.atd;
+      crea -= prev_answer * questions[qn].effect.crea;
       prev_answer = null;
       init_question();
     }
@@ -158,10 +158,10 @@ stats"
     function results() {
       location.href =
         `results.html` +
-        `?e=${calc_score(econ, max_econ)}` +
-        `&d=${calc_score(dipl, max_dipl)}` +
-        `&g=${calc_score(govt, max_govt)}` +
-        `&s=${calc_score(scty, max_scty)}`;
+        `?e=${calc_score(style, max_style)}` +
+        `&d=${calc_score(strat, max_strat)}` +
+        `&g=${calc_score(atd, max_atd)}` +
+        `&s=${calc_score(crea, max_crea)}`;
     }
   </script>
 </body>
